@@ -17,7 +17,7 @@ public interface PaymentRepository extends MongoRepository<Payment,String> {
 
     List<Payment> findByStatus(String status);
 
-    List<Payment> findByUserAndTimestampBetween(Integer userId, Date startDate, Date endDate);
+    List<Payment> findByUserIdAndTimestampBetween(Integer userId, Date startDate, Date endDate);
 
     List<Payment> findByTimestampBetween(Date startDate, Date endDate);
 
