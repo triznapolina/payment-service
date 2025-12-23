@@ -1,22 +1,26 @@
 package com.dto;
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PaymentDto {
 
-    private String id;
+    private Long id;
 
     @NotBlank(message = "Order ID cannot be blank")
     @Size(max = 50, message = "Order ID must be less than 50 characters")
-    private String orderId;
+    private Long orderId;
 
     @NotBlank(message = "User ID cannot be blank")
     @Size(max = 50, message = "User ID must be less than 50 characters")
-    private String userId;
+    private Long userId;
 
     private String status;
 

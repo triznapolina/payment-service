@@ -1,6 +1,10 @@
 package com.entity;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.*;
@@ -14,13 +18,13 @@ import java.util.Date;
 public class Payment {
 
     @Id
-    private String id;
+    private Long id;
 
     @Field("order_id")
-    private String orderId;
+    private Long orderId;
 
     @Field("user_id")
-    private String userId;
+    private Long userId;
 
     private String status;
 
@@ -28,4 +32,6 @@ public class Payment {
 
     @Field("payment_amount")
     private double paymentAmount;
+
+
 }

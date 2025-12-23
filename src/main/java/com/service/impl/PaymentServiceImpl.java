@@ -52,14 +52,14 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public List<PaymentDto> getPaymentsByOrderId(String orderId) {
+    public List<PaymentDto> getPaymentsByOrderId(Long orderId) {
         return paymentRepository.findByOrderId(orderId).stream()
                 .map(paymentMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<PaymentDto> getPaymentsByUserId(String userId) {
+    public List<PaymentDto> getPaymentsByUserId(Long userId) {
         return paymentRepository.findByUserId(userId).stream()
                 .map(paymentMapper::toDto)
                 .collect(Collectors.toList());
