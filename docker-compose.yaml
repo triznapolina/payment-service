@@ -1,4 +1,23 @@
 services:
+
+  payment-service:
+    build:
+      context: .
+    container_name: payment-service
+    restart: always
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/paymentsDB
+      SPRING_LIQUIBASE_URL: mongodb://mongodb:27017/paymentsDB
+      EXTERNAL_KAFKA_SERVER: kafka:29092
+    depends_on:
+      - kafka
+      - mongodb
+    networks:
+      - pay-net
+
+
   kafka:
     image: apache/kafka:3.7.0
     container_name: kafka-broker
@@ -16,3 +35,23 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
       CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+    networks:
+      - pay-net
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - pay-net
+
+networks:
+  pay-net:
+    driver: bridge
+
+volumes:
+  mongo_data:
