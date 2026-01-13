@@ -14,12 +14,10 @@ public class PaymentDto {
 
     private Long id;
 
-    @NotBlank(message = "Order ID cannot be blank")
-    @Size(max = 50, message = "Order ID must be less than 50 characters")
+    @NotNull(message = "Order ID cannot be blank")
     private Long orderId;
 
-    @NotBlank(message = "User ID cannot be blank")
-    @Size(max = 50, message = "User ID must be less than 50 characters")
+    @NotNull(message = "User ID cannot be blank")
     private Long userId;
 
     private String status;
