@@ -3,6 +3,7 @@ package com.service.impl;
 
 import com.dto.PaymentDto;
 import com.entity.Payment;
+import com.kafka.PaymentKafkaProducer;
 import com.mapper.PaymentMapper;
 import com.repository.PaymentRepository;
 import com.service.PaymentService;
@@ -28,7 +29,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final PaymentMapper paymentMapper;
-
+    private final PaymentKafkaProducer paymentProducer;
 
     private final WebClient webClient = WebClient.create();
 
@@ -40,6 +41,8 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setStatus(status);
         payment.setTimestamp(new Date());
         Payment savedPayment = paymentRepository.save(payment);
+
+        paymentProducer.sendPaymentEvent(savedPayment);
 
         return paymentMapper.toDto(savedPayment);
     }

@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface PaymentRepository extends MongoRepository<Payment,String> {
 
-    List<Payment> findByOrderId(String orderId);
+    List<Payment> findByOrderId(Long orderId);
 
-    List<Payment> findByUserId(String userId);
+    List<Payment> findByUserId(Long userId);
 
     List<Payment> findByStatus(String status);
 

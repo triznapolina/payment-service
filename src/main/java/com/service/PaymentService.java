@@ -13,10 +13,10 @@ public interface PaymentService {
 
     List<PaymentDto> getAllPayments();
 
-    List<PaymentDto> getPaymentsByOrderId(String orderId) ;
+    List<PaymentDto> getPaymentsByOrderId(Long orderId) ;
 
 
-    List<PaymentDto> getPaymentsByUserId(String userId);
+    List<PaymentDto> getPaymentsByUserId(Long userId);
 
     List<PaymentDto> getPaymentsByStatus(String status);
 

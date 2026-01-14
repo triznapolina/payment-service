@@ -1,11 +1,15 @@
 package com.dto;
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PaymentDto {
 
     private String id;
@@ -20,3 +24,4 @@ public class PaymentDto {
     @Positive(message = "Payment amount must be positive")
     private Double paymentAmount;
 }
+

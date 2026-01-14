@@ -1,6 +1,5 @@
 package com.entity;
 
-
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -30,4 +29,6 @@ public class Payment {
 
     @Field("payment_amount")
     private double paymentAmount;
+
+
 }
