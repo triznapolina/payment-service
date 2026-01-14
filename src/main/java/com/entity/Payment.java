@@ -17,13 +17,14 @@ public class Payment {
     private String id;
 
     @Field("order_id")
-    private String orderId;
+    private Long orderId;
 
     @Field("user_id")
-    private String userId;
+    private Long userId;
 
     private String status;
 
+    @CreatedDate
     private Date timestamp;
 
     @Field("payment_amount")
