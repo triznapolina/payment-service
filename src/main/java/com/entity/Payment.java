@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.*;
 
@@ -18,7 +19,7 @@ import java.util.Date;
 public class Payment {
 
     @Id
-    private Long id;
+    private String id;
 
     @Field("order_id")
     private Long orderId;
@@ -28,6 +29,7 @@ public class Payment {
 
     private String status;
 
+    @CreatedDate
     private Date timestamp;
 
     @Field("payment_amount")

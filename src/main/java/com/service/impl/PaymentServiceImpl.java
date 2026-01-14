@@ -37,9 +37,10 @@ public class PaymentServiceImpl implements PaymentService {
         Payment payment = paymentMapper.toEntity(paymentDto);
         String status = generateStatusFromApi();
         payment.setStatus(status);
+        payment.setTimestamp(new Date());
         Payment savedPayment = paymentRepository.save(payment);
 
-        paymentProducer.sendPaymentEvent(savedPayment);
+        //paymentProducer.sendPaymentEvent(savedPayment);
 
         return paymentMapper.toDto(savedPayment);
     }
