@@ -10,21 +10,13 @@ public class PaymentDto {
 
     private String id;
 
-    @NotBlank(message = "Order ID cannot be blank")
-    @Size(max = 50, message = "Order ID must be less than 50 characters")
-    private String orderId;
+    @NotNull(message = "Order ID cannot be null")
+    private Long orderId;
 
-    @NotBlank(message = "User ID cannot be blank")
-    @Size(max = 50, message = "User ID must be less than 50 characters")
-    private String userId;
-
-    private String status;
-
-    @NotNull(message = "Timestamp cannot be null")
-    private Date timestamp;
+    @NotNull(message = "User ID cannot be null")
+    private Long userId;
 
     @NotNull(message = "Payment amount cannot be null")
     @Positive(message = "Payment amount must be positive")
     private Double paymentAmount;
-
 }
