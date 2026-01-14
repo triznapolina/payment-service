@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Date;
@@ -32,15 +33,19 @@ public class PaymentServiceImpl implements PaymentService {
     private final WebClient webClient = WebClient.create();
 
     @Override
+    @Transactional
     public PaymentDto createPayment(PaymentDto paymentDto) {
         Payment payment = paymentMapper.toEntity(paymentDto);
         String status = generateStatusFromApi();
         payment.setStatus(status);
+        payment.setTimestamp(new Date());
         Payment savedPayment = paymentRepository.save(payment);
+
         return paymentMapper.toDto(savedPayment);
     }
 
     @Override
+    @Transactional
     public List<PaymentDto> getAllPayments() {
         return paymentRepository.findAll().stream()
                 .map(paymentMapper::toDto)
@@ -48,6 +53,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    @Transactional
     public List<PaymentDto> getPaymentsByOrderId(String orderId) {
         return paymentRepository.findByOrderId(orderId).stream()
                 .map(paymentMapper::toDto)
@@ -55,6 +61,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    @Transactional
     public List<PaymentDto> getPaymentsByUserId(String userId) {
         return paymentRepository.findByUserId(userId).stream()
                 .map(paymentMapper::toDto)
@@ -62,6 +69,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    @Transactional
     public List<PaymentDto> getPaymentsByStatus(String status) {
         return paymentRepository.findByStatus(status).stream()
                 .map(paymentMapper::toDto)
@@ -69,11 +77,13 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    @Transactional
     public List<Payment> getPaymentsForCurrentUserInDateRange(Integer userId, Date startDate, Date endDate) {
         return paymentRepository.findByUserIdAndTimestampBetween(userId, startDate, endDate);
     }
 
     @Override
+    @Transactional
     public List<Payment> getPaymentsForAllUsersInDateRange(Date startDate, Date endDate) {
         return paymentRepository.findByTimestampBetween(startDate, endDate);
     }
