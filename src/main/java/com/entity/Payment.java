@@ -2,6 +2,7 @@ package com.entity;
 
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.*;
 
@@ -17,15 +18,18 @@ public class Payment {
     private String id;
 
     @Field("order_id")
-    private String orderId;
+    private Long orderId;
 
     @Field("user_id")
-    private String userId;
+    private Long userId;
 
     private String status;
 
+    @CreatedDate
     private Date timestamp;
 
     @Field("payment_amount")
     private double paymentAmount;
+
+
 }
