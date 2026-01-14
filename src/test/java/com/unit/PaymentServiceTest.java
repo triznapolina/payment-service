@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -51,10 +50,9 @@ class PaymentServiceTest {
         paymentDto.setOrderId(1L);
         paymentDto.setUserId(1L);
         paymentDto.setPaymentAmount(100.0);
-        paymentDto.setTimestamp(Date.valueOf("2025-02-02"));
 
         payment = new Payment();
-        payment.setId(1L);
+        payment.setId("1");
         payment.setOrderId(1L);
         payment.setUserId(1L);
         payment.setPaymentAmount(100.0);
@@ -65,10 +63,10 @@ class PaymentServiceTest {
     @Test
     void createPayment() {
 
-        PaymentDto inputDto = new PaymentDto(123L, 1L, 101L, "SUCCESS", null, 100.0);
-        Payment paymentEntity = new Payment(123L, 1L, 101L, "SUCCESS", null, 100.0);
-        Payment savedPaymentEntity = new Payment(123L, 1L,  201L, "SUCCESS", null, 100.0);
-        PaymentDto outputDto = new PaymentDto(123L, 1L, 101L,  "SUCCESS", null, 100.0);
+        PaymentDto inputDto = new PaymentDto("123", 1L, 101L, 100.0);
+        Payment paymentEntity = new Payment("123", 1L, 101L, "SUCCESS", null, 100.0);
+        Payment savedPaymentEntity = new Payment("123", 1L,  201L, "SUCCESS", null, 100.0);
+        PaymentDto outputDto = new PaymentDto("123", 1L, 101L, 100.0);
 
         when(paymentMapper.toEntity(inputDto)).thenReturn(paymentEntity);
         when(paymentRepository.save(any(Payment.class))).thenReturn(savedPaymentEntity);
@@ -77,7 +75,6 @@ class PaymentServiceTest {
         PaymentDto result = paymentService.createPayment(inputDto);
 
         assertNotNull(result);
-        assertEquals("SUCCESS", result.getStatus());
         verify(paymentMapper).toEntity(inputDto);
         verify(paymentRepository).save(paymentEntity);
 

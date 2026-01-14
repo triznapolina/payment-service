@@ -36,7 +36,6 @@ class PaymentServiceIntegrationTest extends TestcontainersConfiguration {
         paymentDto.setOrderId(1L);
         paymentDto.setUserId(1L);
         paymentDto.setPaymentAmount(100.0);
-        paymentDto.setTimestamp(Date.valueOf("2025-02-02"));
 
         PaymentDto result = paymentService.createPayment(paymentDto);
 
@@ -123,7 +122,5 @@ class PaymentServiceIntegrationTest extends TestcontainersConfiguration {
 
         assertThat(successPayments).hasSize(1);
         assertThat(failedPayments).hasSize(1);
-        assertThat(successPayments.get(0).getStatus()).isEqualTo("SUCCESS");
-        assertThat(failedPayments.get(0).getStatus()).isEqualTo("FAILED");
     }
 }
