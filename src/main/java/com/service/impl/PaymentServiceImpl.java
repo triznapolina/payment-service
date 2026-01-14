@@ -40,7 +40,7 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setTimestamp(new Date());
         Payment savedPayment = paymentRepository.save(payment);
 
-        //paymentProducer.sendPaymentEvent(savedPayment);
+        paymentProducer.sendPaymentEvent(savedPayment);
 
         return paymentMapper.toDto(savedPayment);
     }
